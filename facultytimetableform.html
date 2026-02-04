@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Timetable Management</title>
+ <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input, select {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+ </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Faculty Timetable Management Form</h2>
+        <form id="timetableForm" onsubmit="return validateForm()">
+            <label for="instructor_id">Instructor ID:</label>
+            <input type="text" id="instructor_id" name="instructor_id" required>
+            
+            <label for="course_id">Course ID:</label>
+            <input type="text" id="course_id" name="course_id" required>
+            
+            <label for="day">Day:</label>
+            <select id="day" name="day" required>
+                <option value="">Select Day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+            </select>
+            
+            <label for="time_slot">Time Slot:</label>
+            <input type="time" id="time_slot" name="time_slot" required>
+            
+            <label for="classroom_id">Classroom ID:</label>
+            <input type="text" id="classroom_id" name="classroom_id" required>
+
+            <button type="submit">Assign Timetable</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const instructorId = document.getElementById('instructor_id').value;
+    const courseId = document.getElementById('course_id').value;
+    const day = document.getElementById('day').value;
+    const timeSlot = document.getElementById('time_slot').value;
+    const classroomId = document.getElementById('classroom_id').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!instructorId || !courseId || !day || !timeSlot || !classroomId) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Check if time slot is valid
+    if (!/^([0-9]{2}):([0-9]{2})$/.test(timeSlot)) {
+        errorMessage.textContent = "Please select a valid time slot.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Timetable Assigned Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>

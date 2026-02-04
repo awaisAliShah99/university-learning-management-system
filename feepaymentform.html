@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payment Form</title>
+   <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input, select {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+   </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Fee Payment Form</h2>
+        <form id="feeForm" onsubmit="return validateForm()">
+            <label for="payment_id">Payment ID:</label>
+            <input type="text" id="payment_id" name="payment_id" required>
+            
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required>
+            
+            <label for="amount_paid">Amount Paid:</label>
+            <input type="number" id="amount_paid" name="amount_paid" required min="1" placeholder="Amount Paid in USD">
+            
+            <label for="payment_date">Payment Date:</label>
+            <input type="date" id="payment_date" name="payment_date" required>
+            
+            <label for="payment_method">Payment Method:</label>
+            <select id="payment_method" name="payment_method" required>
+                <option value="">Select Payment Method</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Cash">Cash</option>
+            </select>
+
+            <button type="submit">Submit Payment</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const paymentId = document.getElementById('payment_id').value;
+    const studentId = document.getElementById('student_id').value;
+    const amountPaid = document.getElementById('amount_paid').value;
+    const paymentDate = document.getElementById('payment_date').value;
+    const paymentMethod = document.getElementById('payment_method').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!paymentId || !studentId || !amountPaid || !paymentDate || !paymentMethod) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Check if amount paid is a positive number
+    if (amountPaid <= 0) {
+        errorMessage.textContent = "Amount Paid must be a positive number.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Payment Submitted Successfully!");
+    return true;
+}
+
+    </script>
+</html>

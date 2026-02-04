@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Registration</title>
+        <style>
+            * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input, select {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>Student Registration form</h2>
+            <form action="submit_student_data.php" method="POST">
+                <div class="input-group">
+                    <label for="student_id">Student_id:</label>
+                    <input type="number" id="student_id" name="student_id"
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="student_name">Full Name:</label>
+                    <input type="text" id="student_name" name="student_name"
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">contact_Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="input-group">
+                    <label for="DEpt_id">DEpartement_id:</label>
+                    <input type="number" id="DEpt_id" name="DEpt_id" required>
+                </div>
+                <div class="input-group">
+                    <label for="Program_id">DEpartement_id:</label>
+                    <input type="number" id="Program_id" name="Program_id"
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="enrol-date">Enrollment_date:</label>
+                    <input type="date" id="enrol-date" name="enrol-date"
+                        required>
+                </div>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>

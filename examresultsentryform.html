@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results Entry Form</title>
+ <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+ </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Exam Results Entry Form</h2>
+        <form id="examResultsForm" onsubmit="return validateForm()">
+            <label for="result_id">Result ID:</label>
+            <input type="text" id="result_id" name="result_id" required>
+            
+            <label for="exam_id">Exam ID:</label>
+            <input type="text" id="exam_id" name="exam_id" required>
+            
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required>
+            
+            <label for="marks_obtained">Marks Obtained:</label>
+            <input type="number" id="marks_obtained" name="marks_obtained" required>
+
+            <button type="submit">Submit Results</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const resultId = document.getElementById('result_id').value;
+    const examId = document.getElementById('exam_id').value;
+    const studentId = document.getElementById('student_id').value;
+    const marksObtained = document.getElementById('marks_obtained').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!resultId || !examId || !studentId || !marksObtained) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Check if marks obtained is a valid number and within valid range
+    if (isNaN(marksObtained) || marksObtained < 0) {
+        errorMessage.textContent = "Marks Obtained must be a valid number greater than or equal to 0.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Exam Results Submitted Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>

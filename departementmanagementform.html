@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Management Form</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Department Management Form</h2>
+        <form id="departmentForm" onsubmit="return validateForm()">
+            <label for="department_id">Department ID:</label>
+            <input type="text" id="department_id" name="department_id" required>
+
+            <label for="name">Department Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="head_of_department">Head of Department:</label>
+            <input type="text" id="head_of_department" name="head_of_department" required>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="contact_number">Contact Number:</label>
+            <input type="text" id="contact_number" name="contact_number" required>
+
+            <button type="submit">Submit Department</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const departmentId = document.getElementById('department_id').value;
+    const name = document.getElementById('name').value;
+    const headOfDepartment = document.getElementById('head_of_department').value;
+    const location = document.getElementById('location').value;
+    const contactNumber = document.getElementById('contact_number').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!departmentId || !name || !headOfDepartment || !location || !contactNumber) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Validate contact number format (simple check: should contain only numbers and be at least 10 digits)
+    const phonePattern = /^[0-9]{10,}$/;
+    if (!phonePattern.test(contactNumber)) {
+        errorMessage.textContent = "Please enter a valid contact number (at least 10 digits).";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Department Record Submitted Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>

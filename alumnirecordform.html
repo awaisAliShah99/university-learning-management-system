@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Record Form</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Alumni Record Form</h2>
+        <form id="alumniForm" onsubmit="return validateForm()">
+            <label for="alumni_id">Alumni ID:</label>
+            <input type="text" id="alumni_id" name="alumni_id" required>
+
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required>
+
+            <label for="program_id">Program ID:</label>
+            <input type="text" id="program_id" name="program_id" required>
+
+            <label for="graduation_date">Graduation Date:</label>
+            <input type="date" id="graduation_date" name="graduation_date" required>
+
+            <label for="current_occupation">Current Occupation:</label>
+            <input type="text" id="current_occupation" name="current_occupation" required>
+
+            <button type="submit">Submit Alumni Record</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+    const alumniId = document.getElementById('alumni_id').value;
+    const studentId = document.getElementById('student_id').value;
+    const programId = document.getElementById('program_id').value;
+    const graduationDate = document.getElementById('graduation_date').value;
+    const currentOccupation = document.getElementById('current_occupation').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check thatt all fields  are filled
+    if (!alumniId || !studentId || !programId || !graduationDate || !currentOccupation) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Validate graduation datee is not in the future
+    const today = new Date().toISOString().split('T')[0];
+    if (graduationDate > today) {
+        errorMessage.textContent = "Graduation date cannot be in the future.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Alumni Record Submitted Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>

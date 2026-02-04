@@ -1,0 +1,421 @@
+Dashboard of my University
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>University Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            /* Offset for sidebar */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #3498db;
+            padding: 15px;
+            position: fixed;
+            width: calc(100% - 250px);
+            /* Account for sidebar width */
+            /* Offset for margin-left: 250px; sidebar */
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #f1c40f;
+        }
+
+        /* Background Area */
+        .background-area{
+            /* padding: 20px; */
+            /* background-image: url(1.jpeg); */
+            /* height: 100vh; */
+            /* Replace with your image URL */
+            /* background-size: cover;
+            /* background-position: center; */
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            /* align-items: center; */
+            /* margin-top: 60px; */
+            /* Space for navbar */
+            margin-bottom: 60px;
+            /* Space for footer */
+            background-image: url(1.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position:center;
+            opacity: 0.5px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .category {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-title {
+            font-size: 18px;
+            color: #fff;
+            background-color: #444;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .category li {
+            margin: 5px 0;
+        }
+
+        .category li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .category li a:hover {
+            background-color: #007bff;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+
+        .services-section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .services-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .services-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* About Us Section */
+        .about-section {
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+
+        .about-section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Us Section */
+        .contact-section {
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+
+        .contact-section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .contact-section form {
+            margin-top: 20px;
+        }
+
+        .contact-section label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-section input[type="text"],
+        .contact-section input[type="email"] {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-section textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-section input[type="submit"] {
+            width: 100%;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: #f1c40f;
+        }
+    </style>
+
+<body>
+
+    <div class="sidebar">
+        <h2>University Management System</h2>
+        <ul class="category">
+            <li class="category-title">Student Management</li>
+            <li><a href="studentregistration.html">Student Registration
+                    Form</a></li>
+            <li><a href="examresultsentryform.html">Exam Results Entry
+                    Form</a></li>
+            <li><a href="studentperformancereportform.html">Student
+                    Performance Report</a></li>
+            <li><a href="attendencemanagementform.html">Attendance
+                    Management</a></li>
+        </ul>
+
+        <ul class="category">
+            <li class="category-title">Department Management</li>
+            <li><a href="departementmanagementform.html">Department
+                    Form</a></li>
+            <li><a href="programmanagementform.html">Program Management
+                    Form</a></li>
+            <li><a href="resourceallocationform.html">Resource Allocation
+                    Form</a></li>
+        </ul>
+
+        <ul class="category">
+            <li class="category-title">Instructor Management</li>
+            <li><a href="instructormanagementform.html">Instructor
+                    Management Form</a></li>
+            <li><a href="facultytimetableform.html">Faculty
+                    Timetable</a></li>
+        </ul>
+
+        <ul class="category">
+            <li class="category-title">Hostel & Library</li>
+            <li><a href="librarybookmanagementform.html">Library Book
+                    Management</a></li>
+            <li><a href="libraryfinesform.html">Library Fines</a></li>
+            <li><a href="borrowingrecordform.html">Borrowing Record</a></li>
+            <li><a href="hostelallocationform.html">Hostel
+                    Allocation</a></li>
+            <li><a href="wardenregistrationform.html">Warden
+                    Registration</a></li>
+        </ul>
+
+        <ul class="category">
+            <li class="category-title">Exam & Schedule</li>
+            <li><a href="exammanagementform.html">Exam Management</a></li>
+            <li><a href="semesterscheduleform.html">Semester
+                    Schedule</a></li>
+        </ul>
+
+        <ul class="category">
+            <li class="category-title">Other Forms</li>
+            <li><a href="courcefeedbackform.html">Course Feedback
+                    Form</a></li>
+            <li><a href="maintanencerequestform.html">Maintenance
+                    Request</a></li>
+            <li><a href="feepaymentform.html">Fee Payment Form</a></li>
+            <li><a href="alumnirecordform.html">Alumni Record Form</a></li>
+        </ul>
+    </div>
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Background image area -->
+        <div class="background-area">
+            <h1>Welcome to the University Dashboard</h1>
+            <p>Manage your courses, library, and more.</p>
+        </div>
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <h1>Our Services</h1>
+            <ul>
+                <li>Library Services</li>
+                <li>Computer Lab Services</li>
+                <li>Counseling Services</li>
+                <li>Placement Services</li>
+            </ul>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="about-section">
+            <h1>About Us</h1>
+            <p>We are a leading educational institution dedicated to providing high-quality education to our students.
+            </p>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="contact-section">
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you! Please use the form below to send us a message.</p>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message"></textarea><br><br>
+                <input type="submit" value="Send Message">
+            </form>
+        </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 AWKUM university. All rights reserved.</p>
+            <ul>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms of Service</a></li>
+                <li><a href="#contact-footer">Contact Us</a></li>
+            </ul>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Allocation Form</title>
+   <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input, select {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+   </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Resource Allocation Form</h2>
+        <form id="resourceForm" onsubmit="return validateForm()">
+            <label for="resources_id">Resource ID:</label>
+            <input type="text" id="resources_id" name="resources_id" required>
+            
+            <label for="type">Resource Type:</label>
+            <select id="type" name="type" required>
+                <option value="">Select Resource Type</option>
+                <option value="Classroom">Classroom</option>
+                <option value="Equipment">Equipment</option>
+                <option value="Facility">Facility</option>
+            </select>
+            
+            <label for="assigned_to">Assigned To:</label>
+            <input type="text" id="assigned_to" name="assigned_to" required>
+            
+            <label for="duration">Duration:</label>
+            <input type="number" id="duration" name="duration" required min="1" placeholder="Duration in hours">
+            
+            <label for="availability">Availability:</label>
+            <select id="availability" name="availability" required>
+                <option value="">Select Availability</option>
+                <option value="Available">Available</option>
+                <option value="Unavailable">Unavailable</option>
+            </select>
+
+            <button type="submit">Allocate Resource</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const resourcesId = document.getElementById('resources_id').value;
+    const type = document.getElementById('type').value;
+    const assignedTo = document.getElementById('assigned_to').value;
+    const duration = document.getElementById('duration').value;
+    const availability = document.getElementById('availability').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!resourcesId || !type || !assignedTo || !duration || !availability) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Check if duration is a positive number
+    if (duration <= 0) {
+        errorMessage.textContent = "Duration must be a positive number.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Resource Allocated Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>

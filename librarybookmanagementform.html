@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Book Management Form</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 18px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Library Book Management Form </h2>
+        <form id="bookManagementForm" onsubmit="return validateForm()">
+            <label for="borrowing_id">Borrowing ID:</label>
+            <input type="text" id="borrowing_id" name="borrowing_id" required>
+            
+            <label for="book_id">Book ID:</label>
+            <input type="text" id="book_id" name="book_id" required>
+            
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required>
+            
+            <label for="borrow_date">Borrow Date:</label>
+            <input type="date" id="borrow_date" name="borrow_date" required>
+            
+            <label for="return_date">Return Date:</label>
+            <input type="date" id="return_date" name="return_date" required>
+
+            <button type="submit">Submit Borrowing</button>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <script>
+function validateForm() {
+    const borrowingId = document.getElementById('borrowing_id').value;
+    const bookId = document.getElementById('book_id').value;
+    const studentId = document.getElementById('student_id').value;
+    const borrowDate = document.getElementById('borrow_date').value;
+    const returnDate = document.getElementById('return_date').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Check if all fields are filled
+    if (!borrowingId || !bookId || !studentId || !borrowDate || !returnDate) {
+        errorMessage.textContent = "Please fill all the fields.";
+        return false;
+    }
+
+    // Check if return date is after borrow date
+    const borrowDateObj = new Date(borrowDate);
+    const returnDateObj = new Date(returnDate);
+    
+    if (returnDateObj < borrowDateObj) {
+        errorMessage.textContent = "Return date cannot be before borrow date.";
+        return false;
+    }
+
+    // Reset error message and submit form
+    errorMessage.textContent = "";
+    alert("Book Borrowing Recorded Successfully!");
+    return true;
+}
+
+    </script>
+</body>
+</html>
